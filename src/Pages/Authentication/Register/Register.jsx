@@ -4,6 +4,7 @@ import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { Link } from "react-router";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
   const [showHide, setShowHide] = useState(false);
@@ -85,6 +86,7 @@ const Register = () => {
             </fieldset>
             <p><small>Already have a account? <Link className="btn-link text-blue-500" to="/login">Login</Link> </small></p>
           </form>
+          <SocialLogin/>
         </div>
       </div>
     </div>

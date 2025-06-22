@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router";
+import SocialLogin from "../SocialLogin/SocialLogin";
+import useAuth from "../../../Hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [showHide, setShowHide] = useState(false);
+  const { handleLogIn } = useAuth();
   const {
     register,
     handleSubmit,
@@ -12,7 +16,18 @@ const Login = () => {
   } = useForm();
 
   const handleLogin = (data) => {
-    console.log(data);
+    const { email, password } = data;
+
+    handleLogIn(email, password)
+      .then((res) => {
+        console.log(res);
+        if (res) {
+          toast.success("Login Done");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -80,6 +95,7 @@ const Login = () => {
               </small>
             </p>
           </form>
+          <SocialLogin />
         </div>
       </div>
     </div>
