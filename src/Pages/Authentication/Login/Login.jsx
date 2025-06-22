@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-toastify";
+import PasswordReset from "../PasswordReset/PasswordReset";
 
 const Login = () => {
   const [showHide, setShowHide] = useState(false);
@@ -81,7 +82,9 @@ const Login = () => {
                 )}
               </div>
               <div>
-                <a className="link link-hover">Forgot password?</a>
+                <Link to="/PasswordReset" className="link link-hover">
+                  Forgot password?
+                </Link>
               </div>
 
               <button className="btn btn-primary text-black mt-4">Login</button>

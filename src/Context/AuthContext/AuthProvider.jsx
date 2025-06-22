@@ -4,13 +4,16 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 
 const googleProvider = new GoogleAuthProvider();
+
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -32,6 +35,12 @@ const AuthProvider = ({ children }) => {
   const handleGoogleLogin = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
+  };
+
+  // Send a password reset email
+  const handlePasswordReset = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email);
   };
 
   //   user logOut
@@ -58,6 +67,7 @@ const AuthProvider = ({ children }) => {
     handleLogIn,
     handleLogOut,
     handleGoogleLogin,
+    handlePasswordReset,
   };
 
   return <AuthContext value={authInfo}>{children}</AuthContext>;
