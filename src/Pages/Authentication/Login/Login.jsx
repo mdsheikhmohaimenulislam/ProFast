@@ -5,15 +5,20 @@ import { Link } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-toastify";
-import PasswordReset from "../PasswordReset/PasswordReset";
+import { auth } from "../../../firebase/firebase";
+import { sendPasswordResetEmail } from "firebase/auth";
+// import PasswordReset from "../PasswordReset/PasswordReset";
 
 const Login = () => {
   const [showHide, setShowHide] = useState(false);
   const { handleLogIn } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
+  // const emailRef = useRef();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm();
 
   const handleLogin = (data) => {
@@ -28,6 +33,22 @@ const Login = () => {
       })
       .catch((error) => {
         console.error(error);
+      });
+  };
+
+  const handleResetBtn = () => {
+    const email = getValues("email");
+    console.log(email);
+
+    setErrorMessage(" ");
+
+    // Send a password reset email
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("A Password rest email is send. Please check your email.");
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
       });
   };
 
@@ -81,12 +102,14 @@ const Login = () => {
                   </p>
                 )}
               </div>
-              <div>
-                <Link to="/PasswordReset" className="link link-hover">
-                  Forgot password?
-                </Link>
+              <div onClick={handleResetBtn} className="cursor-pointer">
+                {/* <Link to="/PasswordReset" className="link link-hover"> */}
+                Forgot password?
+                {/* </Link> */}
               </div>
-
+              {errorMessage && (
+                <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
+              )}
               <button className="btn btn-primary text-black mt-4">Login</button>
             </fieldset>
             <p>
