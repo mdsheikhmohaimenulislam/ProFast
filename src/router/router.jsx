@@ -6,16 +6,40 @@ import Login from "../Pages/Authentication/Login/Login";
 import Register from "../Pages/Authentication/Register/Register";
 // import PasswordReset from "../Pages/Authentication/PasswordReset/PasswordReset";
 import Coverage from "../Pages/Coverage/Coverage";
+import SendParcel from "../Pages/SendParcel/SendParcel";
+import PrivateRoute from "../PrivateRouter/PrivateRoute";
+
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayOut,
-    children: [{ index: true, Component: HomePages },
+    children: [
       {
-        path:'coverage',
-        Component:Coverage,
-      }
+        index: true,
+        Component: HomePages,
+      },
+      {
+        path: "coverage",
+        Component: Coverage,
+      },
+      // {
+      //   path: "sendParcel",
+      //   element: (
+      //     <PrivateRoute>
+      //       <SendParcel />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      {
+        path: "sendParcel",
+        // Component: SendParcel,
+        element: (
+          <PrivateRoute>
+            <SendParcel></SendParcel>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {

@@ -8,6 +8,7 @@ import Aos from "aos";
 import AuthProvider from "./Context/AuthContext/AuthProvider";
 import { ToastContainer } from "react-toastify";
 
+
 Aos.init();
 
 createRoot(document.getElementById("root")).render(
