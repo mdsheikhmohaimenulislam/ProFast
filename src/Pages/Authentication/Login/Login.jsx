@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-toastify";
@@ -14,6 +14,11 @@ const Login = () => {
   const { handleLogIn } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   // const emailRef = useRef();
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location?.state?.from || '/';
+
   const {
     register,
     handleSubmit,
@@ -29,6 +34,7 @@ const Login = () => {
         console.log(res);
         if (res) {
           toast.success("Login Done");
+          navigate(from)
         }
       })
       .catch((error) => {

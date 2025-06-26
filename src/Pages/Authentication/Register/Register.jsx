@@ -3,12 +3,16 @@ import { useForm } from "react-hook-form";
 import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-toastify";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
   const [showHide, setShowHide] = useState(false);
   const { handleRegister } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location?.state?.from || '/';
 
   const {
     register,
@@ -24,6 +28,7 @@ const Register = () => {
         console.log(res);
         if (res) {
           toast.success("Register Done");
+          navigate(from);
         }
       })
       .catch((error) => {
