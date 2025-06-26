@@ -6,6 +6,7 @@ import ClientLogoSlider from '../ClientLogoSlider/ClientLogoSlider';
 import FeatureCards from '../FeatureCards/FeatureCards';
 import Merchant from '../Merchant/Merchant';
 import ReviewSection from '../ReviewSection/ReviewSection';
+import Demo from '../../../Demo';
 
 
 
@@ -19,6 +20,7 @@ const HomePages = () => {
           <FeatureCards/>
           <Merchant/>
           <ReviewSection/>
+          <Demo/>
         </div>
     );
 };

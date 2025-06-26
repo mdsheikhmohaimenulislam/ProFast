@@ -33,6 +33,7 @@ export const router = createBrowserRouter([
       // },
       {
         path: "sendParcel",
+        loader:() => fetch('./public/serviceCenter.json'),
         // Component: SendParcel,
         element: (
           <PrivateRoute>
