@@ -5,7 +5,7 @@ import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-toastify";
 
 const NavBar = () => {
-  const { user,handleLogOut } = useAuth();
+  const { user, handleLogOut } = useAuth();
   console.log(user);
 
   const navItems = (
@@ -22,18 +22,26 @@ const NavBar = () => {
       <li>
         <NavLink to="/about">About Us</NavLink>
       </li>
+
+      {user && (
+        <>
+          <li>
+            <NavLink to="/dashboard">DashBoard</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
-
   const handleLogOutBtn = () => {
     handleLogOut()
-    .then( () => {
-      toast.success("LogOut Successfully")
-    }).catch(error => {
-      console.log(error.message);
-    })
-  }
+      .then(() => {
+        toast.success("LogOut Successfully");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -72,7 +80,10 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <Link onClick={handleLogOutBtn} className="btn btn-primary text-black">
+          <Link
+            onClick={handleLogOutBtn}
+            className="btn btn-primary text-black"
+          >
             {" "}
             LogOut{" "}
           </Link>
