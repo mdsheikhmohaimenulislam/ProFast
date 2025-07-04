@@ -58,10 +58,10 @@ export const router = createBrowserRouter([
         path: "register",
         Component: Register,
       },
-      // {
-      //   path: "PasswordReset",
-      //   Component: PasswordReset,
-      // },
+      {
+        path: "PasswordReset",
+        Component: PasswordReset,
+      },
     ],
   },
   {
